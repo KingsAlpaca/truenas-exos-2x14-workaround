@@ -1,0 +1,17 @@
+--- a/src/middlewared/middlewared/utils/disks_/disk_class.py
++++ b/src/middlewared/middlewared/utils/disks_/disk_class.py
+@@ -212,6 +212,14 @@
+             # src/udev/scsi_id/scsi_serial.c
+             # check_fill_0x83_id(): if (id_search->id_type == SCSI_ID_NAA && wwn != NULL)
+             #                       strncpy(wwn, serial + s, 16);
++            # Exos 2X14 LUNs differ only in the extension of their 128-bit NAA.
++            if (
++                (self.model or "").strip() == "ST14000NM0001"
++                and original_prefix in ("naa.", "0x")
++                and len(wwid) == 32 and set(wwid) <= HEX
++            ):
++                return wwid
++
+             if original_prefix in ("naa.", "0x") and len(wwid) > 16 and set(wwid[:16]) <= HEX:
+                 wwid = wwid[:16]
+ 

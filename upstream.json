@@ -1,0 +1,22 @@
+{
+  "version": "25.10.8",
+  "commit": "29ed02b8082f38494b0d2896bada8151f0d59716",
+  "repository": "https://github.com/truenas/middleware",
+  "tag": "TS-25.10.8",
+  "files": [
+    {
+      "source": "src/middlewared/middlewared/utils/disks_/disk_class.py",
+      "target": "/usr/lib/python3/dist-packages/middlewared/utils/disks_/disk_class.py",
+      "patch": "patches/0001-disk-class-full-naa.patch",
+      "sha256_before": "8cf0525ff88ead99b8403da34c7d2128b7b8b48e1487d75256f1329db6f2b7a2",
+      "sha256_after": "8d3b99e3039886e10aab0bae95e7e0acea8ac22177edf469e9a67598475fe1b5"
+    },
+    {
+      "source": "src/middlewared/middlewared/plugins/device_/device_info.py",
+      "target": "/usr/lib/python3/dist-packages/middlewared/plugins/device_/device_info.py",
+      "patch": "patches/0002-device-info-extended-wwn.patch",
+      "sha256_before": "e734d65224f21933dd1c941450eaabb9d98e49c489dc79459591a7e5e48b20ba",
+      "sha256_after": "4477b8d286529a4b052b7d7d8a2e89e51cf768c4f68875fa525b86bfa7b1fd8f"
+    }
+  ]
+}

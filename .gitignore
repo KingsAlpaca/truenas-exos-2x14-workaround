@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.coverage
+htmlcov/
+.venv/
+*.log
+*.bak
+*.orig
+*.rej
+private/
+evidence-local/

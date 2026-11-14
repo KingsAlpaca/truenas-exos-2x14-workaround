@@ -1,0 +1,16 @@
+--- a/src/middlewared/middlewared/plugins/device_/device_info.py
++++ b/src/middlewared/middlewared/plugins/device_/device_info.py
+@@ -32,6 +32,13 @@
+ 
+     @private
+     def get_lunid(self, dev):
++        # Exos 2X14 LUNs share ID_WWN but have distinct full NAA identifiers.
++        if self.safe_retrieval(dev.properties, 'ID_MODEL', '').strip() == 'ST14000NM0001':
++            extended = self.safe_retrieval(dev.properties, 'ID_WWN_WITH_EXTENSION', '')
++            extended = extended.strip().lower().removeprefix('0x')
++            if re.fullmatch(r'[0-9a-f]{32}', extended):
++                return extended
++
+         # Try udev ID_WWN first (for NAA format WWIDs)
+         lunid = self.safe_retrieval(dev.properties, 'ID_WWN', '').removeprefix('0x').removeprefix('eui.')
+         if lunid:
